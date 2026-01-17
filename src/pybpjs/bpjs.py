@@ -109,7 +109,16 @@ def bridging(credential, endpoint, method = 'get', payload = {}):
             metadata = 'metaData'
             if metadata not in res:
                 metadata = 'metadata'
-
+                
+            if metadata not in res:
+                return {
+                    'metaData': {
+                        'code': 404,
+                        'message': "Response BPJS tidak memiliki metadata"
+                    },
+                    'response': res
+                }
+                
             code = 'code'
             if code not in res[metadata]:
                 code = 'Code'
